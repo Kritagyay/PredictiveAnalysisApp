@@ -1,9 +1,6 @@
-# Predictive Analysis Using Social Profile on Online P2P Lending Market
-
-
 # Project Overview 
 
-# Predictive-Analysis-Using-Social-Profile-on-Online-P2P-Lending-Market by Team-A
+## Predictive-Analysis-Using-Social-Profile-on-Online-P2P-Lending-Market
 
 ## Introduction:
 
