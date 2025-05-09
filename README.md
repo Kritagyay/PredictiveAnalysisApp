@@ -1,3 +1,116 @@
+# Predictive Analysis Using Social Profile on Online P2P Lending Market
+
+## 🚀 Project Overview
+
+This project analyzes and predicts loan performance in peer-to-peer lending markets using both financial and social profile data. The analysis leverages machine learning techniques to provide insights into loan approval and risk assessment.
+
+## 📊 Introduction
+
+Prosper, a global peer-to-peer lending platform, has funded over $8 billion in loans. It enables individuals to invest in each other in a way that is both financially and socially rewarding. Borrowers can list loan requests ranging from $2,000 to $35,000, and individual investors can invest as little as $25 in each loan listing they select.
+
+### Key Findings
+- Analysis of 9,479 completed P2P transactions from 2007
+- Social indicators improve P2P performance prediction
+- Financial strength remains the primary predictor of loan success
+- Integration of social factors enhances traditional financial models
+
+## 🛠️ Technical Stack
+
+### Core Dependencies
+- Python 3.x
+- scikit-learn
+- numpy
+- pandas
+- matplotlib
+- seaborn
+- Flask
+- joblib
+
+### Additional Libraries
+- imblearn (for handling imbalanced data)
+- StandardScaler (for feature scaling)
+- warnings (for handling warnings)
+
+## 📋 Project Pipeline
+
+1. **Data Loading & Preprocessing**
+   - Data cleaning
+   - Handling missing values
+   - Feature engineering
+
+2. **Exploratory Data Analysis**
+   - Univariate analysis
+   - Bivariate analysis
+   - Multivariate analysis
+   - Statistical insights
+
+3. **Model Development**
+   - Feature selection
+   - Model training
+   - Performance evaluation
+   - Model optimization
+
+4. **Web Application**
+   - Flask backend
+   - Interactive frontend
+   - Real-time predictions
+
+## 👥 Team Members
+
+- Kritagya Upadhayay (Member)
+- Satyam Sharma (Member)
+
+## 📈 Key Features
+
+- **Data Analysis**: Comprehensive analysis of loan performance factors
+- **Predictive Modeling**: Machine learning models for loan outcome prediction
+- **Web Interface**: User-friendly interface for loan predictions
+- **Documentation**: Detailed documentation of methodology and findings
+
+## 🔍 Methodology
+
+1. **Data Collection & Cleaning**
+   - Comprehensive data preprocessing
+   - Handling missing values
+   - Feature engineering
+
+2. **Exploratory Analysis**
+   - Statistical analysis
+   - Visualization of key patterns
+   - Correlation studies
+
+3. **Model Development**
+   - Multiple model testing
+   - Performance comparison
+   - Model optimization
+
+4. **Deployment**
+   - Web application development
+   - API integration
+   - User interface design
+
+## 📊 Results
+
+The project successfully demonstrates:
+- Improved prediction accuracy using social indicators
+- Integration of financial and social factors
+- Practical application in P2P lending
+
+## 🚀 Future Scope
+
+- Integration of additional social indicators
+- Real-time data processing
+- Enhanced model accuracy
+- Mobile application development
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 # Project Overview 
 
 # Predictive-Analysis-Using-Social-Profile-on-Online-P2P-Lending-Market by Team-A
