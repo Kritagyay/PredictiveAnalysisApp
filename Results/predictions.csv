@@ -1,0 +1,2 @@
+Timestamp,CreditGrade,BorrowerAPR,BorrowerRate,LenderYield,ProsperScore,CreditScore,MonthlyLoanPayment,LP_CustomerPayments,LP_InterestandFees,LP_ServiceFees,LP_CustomerPrincipalPayments,LP_CollectionFees,LP_GrossPrincipalLoss,LoanOriginalAmount,StatedMonthlyIncome,Prediction,EMI,PROI,ELA
+2025-05-09 14:33:55,3.0,0.16516,0.158,0.138,5.0,640.0,330.43,11396.14,1971.14,-133.18,9425.0,0.0,0.0,9425.0,3083.33,Not Defaulted,2.845,0.11,27605.955

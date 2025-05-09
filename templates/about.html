@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Prosper Loan Prediction System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --dark: #2d3748;
+            --light: #f7fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .about-section {
+            padding: 8rem 5% 5rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-description {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .fields-section {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .fields-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .field-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .field-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .field-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .field-description {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .importance-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .features-section {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-description {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-description {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .features-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">Prosper Loan</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/about" class="nav-link">About</a>
+            <a href="/login" class="nav-link">Login</a>
+        </div>
+    </nav>
+
+    <section class="about-section">
+        <div class="about-content">
+            <h1 class="about-title">About Prosper</h1>
+            <p class="about-description">
+                Prosper is a leading online lending platform that connects borrowers with investors. Since our founding in 2005, we've helped millions of people achieve their financial goals through personal loans, credit cards, and home equity solutions. Our mission is to help people advance their financial well-being through simple, fast, and fair financial tools.
+            </p>
+            <div class="company-stats">
+                <div class="stat-card">
+                    <div class="stat-number">$28B+</div>
+                    <div class="stat-label">Loans Facilitated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Trusted Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Years of Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fields-section">
+        <h2 class="fields-title">Loan Assessment Fields</h2>
+        <div class="fields-grid">
+            <div class="field-card">
+                <h3 class="field-name">Credit Grade</h3>
+                <p class="field-description">A standardized rating system (0-7) that evaluates your creditworthiness based on comprehensive financial history. This grade directly influences loan terms and interest rates.</p>
+                <span class="importance-badge">Critical</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Borrower APR</h3>
+                <p class="field-description">The comprehensive Annual Percentage Rate that encompasses all loan costs, including interest and associated fees. This metric provides a standardized measure of the total cost of borrowing.</p>
+                <span class="importance-badge">High</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Borrower Rate</h3>
+                <p class="field-description">The base interest rate applied to your loan principal. This rate is determined by your credit profile and market conditions, forming the foundation of your loan's cost structure.</p>
+                <span class="importance-badge">High</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Lender Yield</h3>
+                <p class="field-description">The net return on investment for lenders after accounting for service fees. This metric is crucial for determining the attractiveness of your loan to potential investors.</p>
+                <span class="importance-badge">Medium</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Prosper Score</h3>
+                <p class="field-description">A proprietary risk assessment metric (1-10) developed through analysis of historical loan performance data. This score provides a comprehensive evaluation of repayment probability.</p>
+                <span class="importance-badge">Critical</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Credit Score</h3>
+                <p class="field-description">A standardized numerical representation of your creditworthiness, derived from your credit history. This score is a fundamental component in risk assessment and loan pricing.</p>
+                <span class="importance-badge">Critical</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Monthly Loan Payment</h3>
+                <p class="field-description">The calculated monthly obligation required to service your loan, including principal and interest components. This figure is essential for debt service coverage analysis.</p>
+                <span class="importance-badge">High</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Customer Payments</h3>
+                <p class="field-description">The aggregate of all payments made toward your loan, encompassing both principal and interest components. This metric reflects your payment history and reliability.</p>
+                <span class="importance-badge">Medium</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Interest and Fees</h3>
+                <p class="field-description">The cumulative amount of interest and associated fees paid on your loan. This metric provides insight into the total cost of borrowing over the loan term.</p>
+                <span class="importance-badge">Medium</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Service Fees</h3>
+                <p class="field-description">Administrative charges associated with loan servicing and management. These fees cover the operational costs of maintaining your loan account.</p>
+                <span class="importance-badge">Low</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Principal Payments</h3>
+                <p class="field-description">The portion of your payments that reduces the original loan amount. This metric tracks the progress of principal reduction over the loan term.</p>
+                <span class="importance-badge">Medium</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Collection Fees</h3>
+                <p class="field-description">Charges incurred for managing delinquent accounts and late payments. These fees are only applicable in cases of payment default or delinquency.</p>
+                <span class="importance-badge">Low</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Gross Principal Loss</h3>
+                <p class="field-description">The total amount of loan principal written off due to defaults. This metric is crucial for risk assessment and portfolio management.</p>
+                <span class="importance-badge">Medium</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Loan Original Amount</h3>
+                <p class="field-description">The initial principal amount of your loan before any interest or fees. This figure represents the base amount of credit extended to you.</p>
+                <span class="importance-badge">High</span>
+            </div>
+            <div class="field-card">
+                <h3 class="field-name">Stated Monthly Income</h3>
+                <p class="field-description">Your declared monthly income, which is a critical factor in determining debt service capacity and loan eligibility. This metric is essential for affordability assessment.</p>
+                <span class="importance-badge">Critical</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-content">
+            <h2 class="features-title">Our Key Features</h2>
+            <p class="features-description">
+                Discover why our loan prediction system stands out in the financial technology landscape. 
+                We combine cutting-edge technology with financial expertise to deliver exceptional results.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Analysis</h3>
+                    <p class="feature-description">
+                        Advanced machine learning algorithms analyze multiple data points to provide accurate loan predictions.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Real-Time Results</h3>
+                    <p class="feature-description">
+                        Get instant predictions and comprehensive analysis of loan applications.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Secure & Reliable</h3>
+                    <p class="feature-description">
+                        Bank-grade security measures to protect your sensitive financial data.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="feature-title">Detailed Analytics</h3>
+                    <p class="feature-description">
+                        Comprehensive reports with key metrics and risk assessments.
+                    </p>
+                </div>
+            </div>
+            <div class="features-cta">
+                <a href="/#features" class="btn btn-primary">Learn More About Our Features</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 

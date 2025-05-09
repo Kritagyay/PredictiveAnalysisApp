@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - Loan Prediction System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 400px;
+            max-width: 100%;
+            padding: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid #764ba2;
+            color: #764ba2;
+        }
+
+        .form-container form {
+            display: none;
+        }
+
+        .form-container form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            border-color: #764ba2;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(118, 75, 162, 0.1);
+        }
+
+        .captcha-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .captcha-image {
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.2);
+        }
+
+        .error-message {
+            color: #ff3860;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #ffe6e6;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .success-message {
+            color: #23d160;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #e6ffe6;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .strength-meter {
+            height: 4px;
+            background-color: #ddd;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-meter div {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .text-success {
+            color: #23d160;
+        }
+        
+        .text-danger {
+            color: #ff3860;
+        }
+        
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-right-color: transparent;
+            animation: rotate 0.8s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+        
+        .flash-message {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .flash-message.error {
+            background-color: #ffe6e6;
+            color: #ff3860;
+            border: 1px solid #ff3860;
+        }
+        
+        .flash-message.success {
+            background-color: #e6ffe6;
+            color: #23d160;
+            border: 1px solid #23d160;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #555;
+            cursor: pointer;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .forgot-password {
+            color: #764ba2;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="login">Login</div>
+            <div class="tab" data-tab="signup">Sign Up</div>
+        </div>
+        
+        <div class="form-container">
+            <form id="login-form" class="active" >
+                <h2>Welcome Back</h2>
+                <div class="input-group">
+                    <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+                
+                <button type="submit">Login</button>
+                <div id="login-message" class="message"></div>
+                {% if error %}
+                <p class="error-message">{{ error }}</p>
+                {% endif %}
+            </form>
+
+            <form id="signup-form" >
+                <h2>Create Account</h2>
+                <div class="input-group">
+                    <label for="signup-name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signup-name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="signup-password" name="password" required 
+                           onkeyup="checkPasswordStrength(this.value)">
+                    <div class="password-requirements">
+                        Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters
+                    </div>
+                    <div class="strength-meter">
+                        <div id="strength-bar"></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="signup-confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirm_password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+                <div id="signup-message" class="message"></div>
+                {% if signup_error %}
+                <p class="error-message">{{ signup_error }}</p>
+                {% endif %}
+                {% if success %}
+                <p class="success-message">{{ success }}</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // function switchTab(tab) {
+        //     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        //     document.querySelector(`.tab:${tab === 'login' ? 'first-child' : 'last-child'}`).classList.add('active');
+            
+        //     document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
+        //     document.getElementById(`${tab}-form`).classList.add('active');
+        // }
+
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strength-bar');
+            const requirements = document.querySelector('.password-requirements');
+            let strength = 0;
+            let validations = [];
+            
+            // Check length
+            if (password.length >= 8) {
+                strength += 25;
+                validations.push('<i class="fas fa-check text-success"></i> Length (8+ characters)');
+            } else {
+                validations.push('<i class="fas fa-times text-danger"></i> Length (8+ characters)');
+            }
+            
+            // Check uppercase
+            if (password.match(/[A-Z]/)) {
+                strength += 25;
+                validations.push('<i class="fas fa-check text-success"></i> Uppercase letter');
+            } else {
+                validations.push('<i class="fas fa-times text-danger"></i> Uppercase letter');
+            }
+            
+            // Check lowercase
+            if (password.match(/[a-z]/)) {
+                strength += 25;
+                validations.push('<i class="fas fa-check text-success"></i> Lowercase letter');
+            } else {
+                validations.push('<i class="fas fa-times text-danger"></i> Lowercase letter');
+            }
+            
+            // Check numbers and special characters
+            if (password.match(/[0-9]/) && password.match(/[^A-Za-z0-9]/)) {
+                strength += 25;
+                validations.push('<i class="fas fa-check text-success"></i> Number and special character');
+            } else {
+                validations.push('<i class="fas fa-times text-danger"></i> Number and special character');
+            }
+            
+            requirements.innerHTML = validations.join('<br>');
+            strengthBar.style.width = strength + '%';
+            strengthBar.style.backgroundColor = 
+                strength < 50 ? '#ff3860' :
+                strength < 75 ? '#ffdd57' : '#23d160';
+            
+            // Check if passwords match
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            if (confirmPassword) {
+                checkPasswordMatch(password, confirmPassword);
+            }
+        }
+
+        function checkPasswordMatch(password, confirmPassword) {
+            const confirmInput = document.getElementById('signup-confirm-password');
+            const submitButton = document.querySelector('#signup-form button[type="submit"]');
+            
+            if (password === confirmPassword) {
+                confirmInput.style.borderColor = '#23d160';
+                submitButton.disabled = false;
+            } else {
+                confirmInput.style.borderColor = '#ff3860';
+                submitButton.disabled = true;
+            }
+        }
+
+        // Add event listener for password confirmation
+        document.getElementById('signup-confirm-password').addEventListener('input', function() {
+            const password = document.getElementById('signup-password').value;
+            checkPasswordMatch(password, this.value);
+        });
+
+        function refreshCaptcha() {
+            fetch('/refresh-captcha')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('captcha-image').src = 'data:image/png;base64,' + data.image;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Add event listener for tab switching
+        // document.querySelectorAll('.tab').forEach(tab => {
+        //     tab.addEventListener('click', () => {
+        //         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        //         tab.classList.add('active');
+                
+        //         const isLogin = tab.getAttribute('data-tab') === 'login';
+        //         document.getElementById('login-form').style.display = isLogin ? 'block' : 'none';
+        //         document.getElementById('signup-form').style.display = isLogin ? 'none' : 'block';
+                
+        //         // Refresh CAPTCHA when switching tabs
+        //         refreshCaptcha();
+        //     });
+        // });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const forms = {
+                login: document.getElementById('login-form'),
+                signup: document.getElementById('signup-form')
+            };
+
+            function switchTab(tabName) {
+                tabs.forEach(t => t.classList.remove('active'));
+                forms.login.classList.remove('active');
+                forms.signup.classList.remove('active');
+
+                document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+                forms[tabName].classList.add('active');
+
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+
+            // Activate tab from Flask-rendered variable
+            const activeTab = '{{ active_tab }}';
+            if (activeTab === 'signup') {
+                switchTab('signup');
+            } else {
+                switchTab('login');
+            }
+        });
+
+
+        // Set active tab based on server-side parameter
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeTab = '{{ active_tab }}';
+            if (activeTab) {
+                document.querySelector(`[data-tab="${activeTab}"]`).click();
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // prevent form from submitting to the server
+            const button = this.querySelector('button[type="submit"]');
+            button.classList.add('loading');
+            login(); // Call your login function
+        });
+        
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // prevent form from submitting to the server
+            const button = this.querySelector('button[type="submit"]');
+            button.classList.add('loading');
+            signup(); // Call your signup function
+        });
+        
+        // Function to show flash messages
+        function showFlashMessage(message, type) {
+            const flashDiv = document.createElement('div');
+            flashDiv.className = `flash-message ${type}`;
+            flashDiv.innerHTML = `
+                <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
+                ${message}
+            `;
+            
+            const form = document.querySelector('form.active');
+            form.insertBefore(flashDiv, form.firstChild);
+            
+            setTimeout(() => {
+                flashDiv.remove();
+            }, 5000);
+        }
+        
+        // Handle form validation errors
+        function validateForm(formId) {
+            const form = document.getElementById(formId);
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ff3860';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (!isValid) {
+                showFlashMessage('Please fill in all required fields', 'error');
+            }
+            
+            return isValid;
+        }
+        
+        // Add validation to forms
+        // document.getElementById('login-form').addEventListener('submit', function(e) {
+        //     if (!validateForm('login-form')) {
+        //         e.preventDefault();
+        //     }
+        // });
+        
+        // document.getElementById('signup-form').addEventListener('submit', function(e) {
+        //     if (!validateForm('signup-form')) {
+        //         e.preventDefault();
+        //     }
+        // });
+
+        // Authentication code 
+        // Store users in localStorage
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users') || '[]');
+        }
+
+        function setUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function signup() {
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+
+            const message = document.getElementById('signup-message');
+            message.className = 'message';
+
+            if (!name || !email || !password) {
+                message.textContent = 'Please fill all fields';
+                message.classList.add('error');
+                return;
+            }
+
+            let users = getUsers();
+            if (users.find(u => u.email === email)) {
+                message.textContent = 'Email already registered';
+                message.classList.add('error');
+                return;
+            }
+
+            users.push({ name, email, password });
+            setUsers(users);
+
+            message.textContent = 'Signup successful! Please login.';
+            message.classList.add('success');
+        }
+
+        function login() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            const message = document.getElementById('login-message');
+            message.className = 'message';
+
+            const users = getUsers();
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // Optional: show success message briefly
+                message.textContent = `Welcome back, ${user.name}! Redirecting...`;
+                message.classList.add('success');
+
+                // Redirect to Flask route after short delay
+                setTimeout(() => {
+                    window.location.href = '/apply';
+                }, 1000); // 1 second delay for user feedback
+            } else {
+                message.textContent = 'Invalid email or password';
+                message.classList.add('error');
+            }
+        }
+
+        function clearMessages() {
+            document.getElementById('login-message').textContent = '';
+            document.getElementById('signup-message').textContent = '';
+        }
+    </script>
+</body>
+</html> 
